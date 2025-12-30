@@ -5,3 +5,5 @@ run:
 	./.out/restore-vercel-deployments
 run-dev:
 	go run main.go
+build-docker:
+	docker build -t restore-vercel-deployments .

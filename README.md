@@ -28,16 +28,27 @@ go mod download
 
 ## Configuration
 
-Edit `main.go` and set your configuration:
+The tool uses environment variables for configuration. You can either:
 
-```go
-const (
-    LOG_LEVEL        = logger.LevelInfo          // Options: LevelDebug, LevelInfo, LevelError, LevelDisabled
-    VERCEL_API_URL   = "https://vercel.com/api"  // Default Vercel API URL
-    VERCEL_API_TOKEN = "<YOUR_VERCEL_API_TOKEN>" // Your Vercel API token
-    RESTORE_COOLDOWN = 250 * time.Millisecond    // Time to wait between restore requests to avoid rate limits
-)
-```
+1. **Create a `.env` file** (recommended):
+   ```bash
+   cp .env.example .env
+   # Edit .env with your values
+   ```
+
+2. **Set environment variables directly**:
+   ```bash
+   export VERCEL_API_TOKEN=your_token_here
+   ```
+
+### Environment Variables
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `VERCEL_API_TOKEN` | ✅ Yes | - | Your Vercel API token |
+| `VERCEL_API_URL` | No | `https://vercel.com/api` | Custom Vercel API URL |
+| `LOG_LEVEL` | No | `info` | Log level: `debug`, `info`, `error`, `disabled` |
+| `RESTORE_COOLDOWN_MS` | No | `250` | Milliseconds to wait between API calls |
 
 ### Getting a Vercel API Token
 
@@ -61,6 +72,8 @@ make run
 or
 go build -o .out/restore-vercel-deployments
 ./.out/restore-vercel-deployments
+or
+docker compose up
 ```
 
 ## Output

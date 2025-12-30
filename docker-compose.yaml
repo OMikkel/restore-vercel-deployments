@@ -1,0 +1,11 @@
+services:
+  restore-vercel-deployments:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      tags:
+        - restore-vercel-deployments:latest
+    container_name: restore-vercel-deployments
+    command: ["./restore-vercel-deployments"]
+    environment:
+      - VERCEL_API_TOKEN=
